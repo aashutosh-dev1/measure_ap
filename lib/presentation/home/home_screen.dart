@@ -378,9 +378,60 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
+              const Gap(43.0),
+              const GradientButton(),
+              const Gap(15.0),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class GradientButton extends StatelessWidget {
+  const GradientButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 18.0),
+      decoration: BoxDecoration(
+        color: const Color(0xFF161616),
+        borderRadius: BorderRadius.circular(30.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.blue.withOpacity(0.2),
+            offset: const Offset(0, 8),
+            blurRadius: 10.0,
+            spreadRadius: -4,
+          ),
+          BoxShadow(
+            color: Colors.red.withOpacity(0.4),
+            offset: const Offset(0, 8),
+            blurRadius: 10.0,
+            spreadRadius: -4,
+          ),
+          BoxShadow(
+            color: Colors.orange.withOpacity(0.2),
+            offset: const Offset(0, 8),
+            blurRadius: 10.0,
+            spreadRadius: 2,
+          ),
+        ],
+      ),
+      child: const Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            '+ New assessment',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
       ),
     );
   }
