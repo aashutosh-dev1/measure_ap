@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:measure_ap/presentation/assessment/create_assessment_screen.dart';
+import 'package:measure_ap/presentation/assessment/question_screen.dart';
 import 'package:measure_ap/presentation/resources/color_manager.dart';
 import 'package:measure_ap/presentation/resources/custom_text_theme.dart';
 
@@ -379,7 +381,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const Gap(43.0),
-              const GradientButton(),
+              InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const QuizPage(),
+                        ));
+                  },
+                  child: const GradientButton()),
               const Gap(15.0),
             ],
           ),

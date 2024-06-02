@@ -6,10 +6,12 @@ TextStyle customTextStyle({
   double fontSize = 12.0,
   FontWeight fontWeight = FontWeight.w400,
   Color? color,
+  double? ls,
 }) {
   return GoogleFonts.manrope(
     fontSize: fontSize,
     fontWeight: fontWeight,
+    letterSpacing: ls,
     color: color ?? ColorManager.dark,
   );
 }
