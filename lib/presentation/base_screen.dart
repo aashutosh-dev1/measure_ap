@@ -1,37 +1,56 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:measure_ap/data/firebase_services.dart';
+import 'package:measure_ap/presentation/history/history_screen.dart';
+import 'package:measure_ap/presentation/home/home_cubit/home_cubit.dart';
 import 'package:measure_ap/presentation/home/home_screen.dart';
 import 'package:measure_ap/presentation/resources/color_manager.dart';
 import 'package:measure_ap/presentation/resources/custom_text_theme.dart';
 
 class BaseScreen extends StatefulWidget {
-  const BaseScreen({super.key});
+  final int? index;
+  const BaseScreen({super.key, this.index});
 
   @override
   State<BaseScreen> createState() => _BaseScreenState();
 }
 
 class _BaseScreenState extends State<BaseScreen> {
+  int? _selectedIndex;
+
+  @override
+  void initState() {
+    fetchAssessmentsApi();
+    setIndex();
+    super.initState();
+  }
+
+  setIndex() {
+    _selectedIndex = widget.index ?? 0;
+  }
+
+  fetchAssessmentsApi() {
+    context.read<HomeCubit>().fetchAssessments();
+  }
+
   static const List<Widget> _widgetItems = [
     HomeScreen(),
-    Text('1'),
-    Text('2'),
-    Text('3'),
+    SafeArea(child: Center(child: Text('Paitent Screen ... TODO'))),
+    HistoryScreen(),
+    SafeArea(child: Center(child: Text('Settings Screen ... TODO'))),
   ];
-  int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _widgetItems.elementAt(_selectedIndex),
+      body: _widgetItems.elementAt(_selectedIndex ?? 0),
       backgroundColor: Colors.white,
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
         showSelectedLabels: true,
         onTap: (value) {
-          FirebaseServices().fetchAssessmentsFromFirestore();
           setState(() {
             _selectedIndex = value;
           });
@@ -54,7 +73,7 @@ class _BaseScreenState extends State<BaseScreen> {
               color:
                   _selectedIndex == 1 ? ColorManager.orange : ColorManager.dark,
             ),
-            label: 'Icon',
+            label: 'Paitent',
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(

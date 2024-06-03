@@ -5,12 +5,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:measure_ap/firebase_options.dart';
 import 'package:measure_ap/presentation/assessment/assessment_cubit/assessment_cubit.dart';
 import 'package:measure_ap/presentation/base_screen.dart';
+import 'package:measure_ap/presentation/home/home_cubit/home_cubit.dart';
 
 Future<void> main() async {
-   WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -22,8 +23,15 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 1087),
       minTextAdapt: true,
       splitScreenMode: true,
-      child: BlocProvider<AssessmentCubit>(
-        create: (context) => AssessmentCubit(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<AssessmentCubit>(
+            create: (context) => AssessmentCubit(),
+          ),
+          BlocProvider(
+            create: (context) => HomeCubit(),
+          ),
+        ],
         child: MaterialApp(
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
