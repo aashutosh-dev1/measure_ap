@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "3108472113",
+    "project_id": "measure-app-fd0af",
+    "storage_bucket": "measure-app-fd0af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3108472113:android:0f141616a540e7e8ad5c10",
+        "android_client_info": {
+          "package_name": "com.example.measure_ap"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxQi0S2I_NCHza32_fS-NMtrIkpYBvKpE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

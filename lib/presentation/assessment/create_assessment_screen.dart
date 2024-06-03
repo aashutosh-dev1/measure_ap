@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:measure_ap/domain/assessment_model.dart';
+import 'package:measure_ap/presentation/assessment/assessment_cubit/assessment_cubit.dart';
+import 'package:measure_ap/presentation/assessment/question_screen.dart';
 import 'package:measure_ap/presentation/resources/color_manager.dart';
 import 'package:measure_ap/presentation/resources/custom_text_theme.dart';
+import 'package:measure_ap/presentation/widgets/build_questions_ui.dart';
+import 'package:measure_ap/presentation/widgets/gradient_button.dart';
 
 class CreateAssessment extends StatefulWidget {
   const CreateAssessment({super.key});
@@ -12,8 +18,13 @@ class CreateAssessment extends StatefulWidget {
 
 class _CreateAssessmentState extends State<CreateAssessment> {
   String? _selectedCognitive, _selectedApplicableMeasure;
+  final TextEditingController paitentNameController = TextEditingController();
 
-  final List<String> _cognitiveStatus = ['Cognition', 'Z00.00', 'Z01.89'];
+  final List<String> _cognitiveStatus = [
+    'Cognition',
+    'Z00.00',
+    'Z01.89',
+  ];
   final List<String> _applicableMeasures = [
     'Slums',
     'Phyical Examination',
@@ -21,11 +32,47 @@ class _CreateAssessmentState extends State<CreateAssessment> {
   ];
   bool isApplicableMeasuresEnabled = false;
   bool isPaitentEnabled = false;
+  @override
+  void dispose() {
+    paitentNameController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorManager.grey,
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
+        child: GradientButton(
+          label: 'Start assessment',
+          onTap: (isApplicableMeasuresEnabled &&
+                  isPaitentEnabled &&
+                  paitentNameController.text.isNotEmpty)
+              ? () {
+                  context.read<AssessmentCubit>().setAssessmentData(
+                        assessmentModel: AssessmentModel(
+                          cognitiveStatus: _selectedCognitive!,
+                          applicaableMeasures: _selectedApplicableMeasure!,
+                          name: paitentNameController.text,
+                        ),
+                      );
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const QuizPage(),
+                    ),
+                  );
+                }
+              : () {},
+          isEnabled: (isApplicableMeasuresEnabled &&
+                  isPaitentEnabled &&
+                  paitentNameController.text.isNotEmpty)
+              ? true
+              : false,
+        ),
+      ),
       appBar: AppBar(
         backgroundColor: ColorManager.grey,
         title: Text(
@@ -71,7 +118,7 @@ class _CreateAssessmentState extends State<CreateAssessment> {
                 onChanged: (newValue) {
                   setState(() {
                     _selectedCognitive = newValue;
-                    isApplicableMeasuresEnabled = !isApplicableMeasuresEnabled;
+                    isApplicableMeasuresEnabled = true;
                   });
                 },
                 items: _cognitiveStatus.map((status) {
@@ -104,7 +151,9 @@ class _CreateAssessmentState extends State<CreateAssessment> {
             const Gap(8.0),
             Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: isApplicableMeasuresEnabled
+                    ? Colors.white
+                    : ColorManager.grey,
                 borderRadius: BorderRadius.circular(10.0),
                 border: Border.all(color: Colors.grey[300]!),
               ),
@@ -113,18 +162,21 @@ class _CreateAssessmentState extends State<CreateAssessment> {
                   contentPadding:
                       EdgeInsets.symmetric(horizontal: 12.0, vertical: 15.0),
                   border: InputBorder.none,
-                 ),
+                ),
                 hint: Text('Select applicable measures',
                     style: customTextStyle(
                       fontSize: 16.0,
                       color: ColorManager.lightGrey,
                     )),
                 value: _selectedApplicableMeasure,
-                onChanged: (newValue) {
-                  setState(() {
-                    _selectedApplicableMeasure = newValue;
-                  });
-                },
+                onChanged: isApplicableMeasuresEnabled
+                    ? (newValue) {
+                        setState(() {
+                          _selectedApplicableMeasure = newValue;
+                          isPaitentEnabled = true;
+                        });
+                      }
+                    : null,
                 items: _applicableMeasures.map((status) {
                   return DropdownMenuItem<String>(
                     value: status,
@@ -154,12 +206,32 @@ class _CreateAssessmentState extends State<CreateAssessment> {
             ),
             const Gap(8.0),
             Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10.0),
-                  border: Border.all(color: Colors.grey[300]!),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10.0),
+                border: Border.all(color: Colors.grey[300]!),
+              ),
+              child: TextField(
+                controller: paitentNameController,
+                enabled: isPaitentEnabled ? true : false,
+                onChanged: (value) => setState(() {
+                  paitentNameController.text = value;
+                }),
+                decoration: InputDecoration(
+                  hintText: 'Enter patient name or ID',
+                  hintStyle: TextStyle(
+                    color: Colors.grey[500],
+                  ),
+                  fillColor:
+                      isPaitentEnabled ? Colors.white : ColorManager.grey,
+                  filled: true,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                    borderSide: BorderSide.none,
+                  ),
                 ),
-                child: const Text("Paitent name")),
+              ),
+            ),
           ],
         ),
       ),

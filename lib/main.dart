@@ -1,8 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:measure_ap/firebase_options.dart';
+import 'package:measure_ap/presentation/assessment/assessment_cubit/assessment_cubit.dart';
 import 'package:measure_ap/presentation/base_screen.dart';
 
-void main() {
+Future<void> main() async {
+   WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
   runApp(const MyApp());
 }
 
@@ -14,16 +22,19 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 1087),
       minTextAdapt: true,
       splitScreenMode: true,
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,         
-          scaffoldBackgroundColor: Colors.transparent,
-        ),
-        home: const GradientBackground(
-          child: BaseScreen(),
+      child: BlocProvider<AssessmentCubit>(
+        create: (context) => AssessmentCubit(),
+        child: MaterialApp(
+          title: 'Flutter Demo',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
+            scaffoldBackgroundColor: Colors.transparent,
+          ),
+          home: const GradientBackground(
+            child: BaseScreen(),
+          ),
         ),
       ),
     );

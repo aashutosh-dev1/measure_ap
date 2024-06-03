@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:measure_ap/presentation/assessment/assessment_cubit/assessment_cubit.dart';
 import 'package:measure_ap/presentation/resources/color_manager.dart';
 import 'package:measure_ap/presentation/resources/custom_text_theme.dart';
 
@@ -51,17 +53,26 @@ class _SingleQuestionWidgetState extends State<SingleQuestionWidget> {
             ),
           ),
           const Gap(32.0),
-     
-     
           Expanded(
             child: ListView.builder(
-              itemCount: 2,
+              itemCount: question.options.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
                     setState(() {
                       selectedOptions = index;
                     });
+                    var isAnswerCorrect = question.options[index] ==
+                        question.correctAnswers.first;
+                    final question1 = {
+                      'questionType': question.questionType,
+                      'answer': {
+                        "isAnswerCorrect": isAnswerCorrect,
+                        "totalMark":question.totalMarks,
+                        "selectedAnswer": question.options[selectedOptions!]
+                      }
+                    };
+                    context.read<AssessmentCubit>().addQuestion(question1);
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 16.0),
@@ -90,8 +101,6 @@ class _SingleQuestionWidgetState extends State<SingleQuestionWidget> {
               },
             ),
           )
-       
-       
         ],
       ),
     );

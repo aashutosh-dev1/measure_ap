@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:measure_ap/domain/question_model.dart';
 
+import '../../assessment/assessment_cubit/assessment_cubit.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/custom_text_theme.dart';
 
@@ -25,6 +27,15 @@ class _SwitchQuestionWidgetState extends State<SwitchQuestionWidget> {
     setState(() {
       selectedAnimal = selectedAnimal == animal ? "" : animal;
     });
+    final question2 = {
+      'questionType': question.questionType,
+      'answer': {
+        "isAnswerCorrect": selectedAnimal == "Dog" ? true : false,
+        "selectedAnswer": selectedAnimal,
+         "totalMark":question.totalMarks,
+      }
+    };
+    context.read<AssessmentCubit>().addQuestion(question2);
   }
 
   QuestionModel get question => widget.question;

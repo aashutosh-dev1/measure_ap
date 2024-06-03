@@ -36,7 +36,7 @@ class QuestionModel {
     return QuestionModel(
       question: map['question'] ?? '',
       description: map['description'] ?? '',
-      options: List<String>.from(map['options']),
+      options: List<String>.from(map['options'])??[],
       correctAnswers: List<String>.from(map['correctAnswers']),
       questionType: map['questionType'] ?? '',
       totalMarks: map['totalMarks']?.toInt() ?? 0,

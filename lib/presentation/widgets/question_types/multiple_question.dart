@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:measure_ap/domain/question_model.dart';
+import 'package:measure_ap/presentation/assessment/assessment_cubit/assessment_cubit.dart';
 import 'package:measure_ap/presentation/widgets/expanded_text.dart';
 
 import '../../resources/color_manager.dart';
@@ -20,6 +22,12 @@ class MultipleQuestionWidget extends StatefulWidget {
 class _MultipleQuestionWidgetState extends State<MultipleQuestionWidget> {
   QuestionModel get question => widget.question;
   List<int> selectedIndex = [];
+  List<String> selectedAnswers = [];
+
+  bool listsHaveSameData(List<dynamic> list1, List<dynamic> list2) {
+    return Set.from(list1).containsAll(list2) &&
+        Set.from(list2).containsAll(list1);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +60,25 @@ class _MultipleQuestionWidgetState extends State<MultipleQuestionWidget> {
                 return GestureDetector(
                   onTap: () {
                     if (selectedIndex.contains(index)) {
-                      removeIndex(index);
+                      removeIndex(index, question.options);
                     } else {
-                      addIndex(index);
+                      addIndex(index, question.options);
                     }
+                    var isCorrect = listsHaveSameData(
+                      selectedAnswers,
+                      question.correctAnswers,
+                    );
+                    final question2 = {
+                      'questionType': question.questionType,
+                      'answer': {
+                        "isAnswerCorrect": isCorrect,
+                        "selectedAnswer": selectedAnswers,
+                         "totalMark":question.totalMarks,
+                      }
+                    };
+                    context.read<AssessmentCubit>().addQuestion(question2);
+                 
+                 
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 16.0),
@@ -113,13 +136,15 @@ class _MultipleQuestionWidgetState extends State<MultipleQuestionWidget> {
     );
   }
 
-  addIndex(int index) {
+  addIndex(int index, List<String> options) {
     selectedIndex.add(index);
+    selectedAnswers.add(options[index]);
     setState(() {});
   }
 
-  removeIndex(int index) {
+  removeIndex(int index, List<String> options) {
     selectedIndex.remove(index);
+    selectedAnswers.remove(options[index]);
     setState(() {});
   }
 }
