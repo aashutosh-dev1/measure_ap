@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
-import 'package:measure_ap/domain/question_model.dart';
+import 'package:measure_ap/domain/models/question_model.dart';
 
 import '../../assessment/assessment_cubit/assessment_cubit.dart';
 import '../../resources/color_manager.dart';

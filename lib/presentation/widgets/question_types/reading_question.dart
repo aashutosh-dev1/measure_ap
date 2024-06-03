@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:measure_ap/domain/question_model.dart';
-import 'package:measure_ap/presentation/assessment/assessment_cubit/assessment_cubit.dart';
-import 'package:measure_ap/presentation/widgets/expanded_text.dart';
+import 'package:measure_ap/domain/models/question_model.dart';
 
 import '../../resources/color_manager.dart';
 import '../../resources/custom_text_theme.dart';

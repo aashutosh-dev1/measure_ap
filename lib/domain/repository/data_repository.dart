@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:measure_ap/data/firebase_services.dart';
 
-import '../assessment_model.dart';
-import '../response_model.dart';
+import '../models/assessment_model.dart';
+import '../models/response_model.dart';
 
 sealed class DataRepository {
   Future<void> saveAssessmentsToFirestore(

@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
-import 'package:measure_ap/domain/response_model.dart';
+import 'package:measure_ap/domain/models/response_model.dart';
 
 import '../resources/color_manager.dart';
 import '../resources/custom_text_theme.dart';

@@ -5,7 +5,7 @@ import 'package:measure_ap/presentation/assessment/assessment_cubit/assessment_c
 import 'package:measure_ap/presentation/resources/color_manager.dart';
 import 'package:measure_ap/presentation/resources/custom_text_theme.dart';
 
-import '../../../domain/question_model.dart';
+import '../../../domain/models/question_model.dart';
 
 class SingleQuestionWidget extends StatefulWidget {
   final QuestionModel question;

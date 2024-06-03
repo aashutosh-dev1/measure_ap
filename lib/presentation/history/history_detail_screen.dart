@@ -1,7 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:measure_ap/domain/response_model.dart';
+import 'package:measure_ap/domain/models/response_model.dart';
 import 'package:measure_ap/presentation/resources/color_manager.dart';
 import 'package:measure_ap/presentation/resources/custom_text_theme.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';

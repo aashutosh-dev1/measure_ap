@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:measure_ap/domain/answer_model.dart';
-import 'package:measure_ap/domain/assessment_model.dart';
-import 'package:measure_ap/domain/response_model.dart';
+import 'package:measure_ap/domain/models/answer_model.dart';
+import 'package:measure_ap/domain/models/assessment_model.dart';
+import 'package:measure_ap/domain/models/response_model.dart';
 
 class FirebaseServices {
   late FirebaseFirestore _firebaseFirestore;

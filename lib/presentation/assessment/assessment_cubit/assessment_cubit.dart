@@ -2,11 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
-import 'package:measure_ap/data/firebase_services.dart';
-import 'package:measure_ap/domain/assessment_model.dart';
-import 'package:measure_ap/domain/question_model.dart';
+import 'package:measure_ap/domain/models/assessment_model.dart';
 import 'package:measure_ap/domain/repository/data_repository.dart';
 
 part 'assessment_state.dart';

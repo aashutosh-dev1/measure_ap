@@ -1,15 +1,13 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:measure_ap/data/firebase_services.dart';
 import 'package:measure_ap/presentation/assessment/assessment_cubit/assessment_cubit.dart';
 import 'package:measure_ap/presentation/base_screen.dart';
 import 'package:measure_ap/presentation/widgets/gradient_button.dart';
 import 'package:measure_ap/presentation/widgets/question_types/result.dart';
 
-import '../../domain/question_model.dart';
+import '../../domain/models/question_model.dart';
 import '../widgets/build_questions_ui.dart';
 
 class QuizPage extends StatefulWidget {

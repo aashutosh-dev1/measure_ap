@@ -2,9 +2,8 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:measure_ap/data/firebase_services.dart';
 import 'package:measure_ap/domain/repository/data_repository.dart';
-import 'package:measure_ap/domain/response_model.dart';
+import 'package:measure_ap/domain/models/response_model.dart';
 
 import '../../assessment/assessment_cubit/assessment_cubit.dart';
 

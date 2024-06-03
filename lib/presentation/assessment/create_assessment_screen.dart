@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:measure_ap/domain/assessment_model.dart';
+import 'package:measure_ap/domain/models/assessment_model.dart';
 import 'package:measure_ap/presentation/assessment/assessment_cubit/assessment_cubit.dart';
 import 'package:measure_ap/presentation/assessment/question_screen.dart';
 import 'package:measure_ap/presentation/resources/color_manager.dart';
 import 'package:measure_ap/presentation/resources/custom_text_theme.dart';
-import 'package:measure_ap/presentation/widgets/build_questions_ui.dart';
 import 'package:measure_ap/presentation/widgets/gradient_button.dart';
 
 class CreateAssessment extends StatefulWidget {

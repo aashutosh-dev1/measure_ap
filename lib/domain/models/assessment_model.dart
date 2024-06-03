@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 
-import 'package:measure_ap/domain/question_model.dart';
 
 class AssessmentModel {
   final String cognitiveStatus;

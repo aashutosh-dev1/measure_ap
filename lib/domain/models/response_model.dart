@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-import 'package:measure_ap/domain/answer_model.dart';
-import 'package:measure_ap/domain/assessment_model.dart';
+import 'package:measure_ap/domain/models/answer_model.dart';
+import 'package:measure_ap/domain/models/assessment_model.dart';
 
 class ResponseModel {
   final AssessmentModel assessment;

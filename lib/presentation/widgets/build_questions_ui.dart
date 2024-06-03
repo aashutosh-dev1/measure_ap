@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:measure_ap/domain/question_model.dart';
+import 'package:measure_ap/domain/models/question_model.dart';
 import 'package:measure_ap/presentation/widgets/question_types/multiple_question.dart';
 import 'package:measure_ap/presentation/widgets/question_types/reading_question.dart';
 import 'package:measure_ap/presentation/widgets/question_types/single_question.dart';
