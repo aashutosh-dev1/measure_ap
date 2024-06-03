@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:measure_ap/data/firebase_services.dart';
 import 'package:measure_ap/domain/assessment_model.dart';
 import 'package:measure_ap/domain/question_model.dart';
+import 'package:measure_ap/domain/repository/data_repository.dart';
 
 part 'assessment_state.dart';
 
@@ -42,10 +43,10 @@ class AssessmentCubit extends Cubit<AssessmentState> {
   }
 
   void sendDataTofireStore() async {
-    final FirebaseServices firebaseServices = FirebaseServices();
+    final DataRepository dataRepository = DataRepositoryImpl();
     try {
       emit(state.copyWith(stateStatus: StateStatus.loading));
-      await firebaseServices.saveAssessmentsToFirestore(
+      await dataRepository.saveAssessmentsToFirestore(
           state.selectedQuestions, state.assessmentModel!);
       calculateResult();
       emit(state.copyWith(stateStatus: StateStatus.success));
